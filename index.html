@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Student Information System - SaaS</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    background: #eef4f8;
+    color: #333;
+}
+
+/* Header */
+
+header {
+    background: linear-gradient(135deg, #1565c0, #0d47a1);
+    color: white;
+    padding: 25px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+header p {
+    margin: 8px 0 0;
+}
+
+/* Container */
+
+.container {
+    width: 92%;
+    max-width: 1200px;
+    margin: 25px auto;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.card h2 {
+    color: #0d47a1;
+    border-bottom: 2px solid #bbdefb;
+    padding-bottom: 10px;
+}
+
+/* Form */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.full {
+    grid-column: 1 / -1;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 6px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+textarea {
+    min-height: 70px;
+    resize: vertical;
+}
+
+button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-right: 8px;
+}
+
+.generate {
+    background: #1565c0;
+    color: white;
+}
+
+.clear {
+    background: #e53935;
+    color: white;
+}
+
+.print {
+    background: #6a1b9a;
+    color: white;
+}
+
+/* Report */
+
+#report {
+    display: none;
+}
+
+.student-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.info-box {
+    background: #f5f9fc;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+}
+
+.info-box strong {
+    color: #0d47a1;
+}
+
+/* Tables */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th, td {
+    border: 1px solid #bbb;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background: #1565c0;
+    color: white;
+}
+
+.progress-container {
+    width: 100%;
+    background: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 22px;
+}
+
+.progress-bar {
+    height: 22px;
+    background: #2e7d32;
+    text-align: center;
+    color: white;
+    font-size: 13px;
+}
+
+/* C Code */
+
+pre {
+    background: #1e1e1e;
+    color: #00ff90;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    line-height: 1.5;
+}
+
+/* Message */
+
+.success {
+    display: none;
+    background: #d8f3dc;
+    color: #1b5e20;
+    padding: 15px;
+    border-radius: 7px;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+/* Footer */
+
+footer {
+    background: #0d47a1;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Mobile */
+
+@media(max-width:700px) {
+
+    .form-grid,
+    .student-info {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+/* Print */
+
+@media print {
+
+    header,
+    .input-card,
+    .c-card,
+    footer,
+    .print {
+        display: none !important;
+    }
+
+    #report {
+        display: block !important;
+    }
+
+    body {
+        background: white;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <h1>🎓 Student Information System</h1>
+
+    <p>
+        Cloud SaaS Application - C Program Student Information
+    </p>
+
+</header>
+
+
+<div class="container">
+
+
+<!-- Student Form -->
+
+<div class="card input-card">
+
+<h2>📝 Student Information</h2>
+
+<form id="studentForm">
+
+<div class="form-grid">
+
+
+<div>
+
+<label>Student Name</label>
+
+<input
+type="text"
+id="studentName"
+placeholder="Enter student name"
+required>
+
+</div>
+
+
+<div>
+
+<label>Register Number</label>
+
+<input
+type="text"
+id="regNo"
+placeholder="Enter register number"
+required>
+
+</div>
+
+
+<div class="full">
+
+<label>Address</label>
+
+<textarea
+id="address"
+placeholder="Enter address"
+required></textarea>
+
+</div>
+
+
+<div>
+
+<label>Phone Number</label>
+
+<input
+type="tel"
+id="phone"
+placeholder="Enter phone number"
+required>
+
+</div>
+
+
+<div>
+
+<label>Age</label>
+
+<input
+type="number"
+id="age"
+min="15"
+max="60"
+required>
+
+</div>
+
+
+<div>
+
+<label>Course</label>
+
+<select id="course" required>
+
+<option value="">Select Course</option>
+
+<option>B.Tech Computer Science</option>
+<option>B.Tech Information Technology</option>
+<option>B.Tech Artificial Intelligence</option>
+<option>B.Tech Electronics</option>
+<option>B.Tech Mechanical Engineering</option>
+<option>B.Sc Computer Science</option>
+<option>BCA</option>
+<option>MCA</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>Semester</label>
+
+<select id="semester">
+
+<option>Semester 1</option>
+<option>Semester 2</option>
+<option>Semester 3</option>
+<option>Semester 4</option>
+<option>Semester 5</option>
+<option>Semester 6</option>
+<option>Semester 7</option>
+<option>Semester 8</option>
+
+</select>
+
+</div>
+
+
+<!-- Marks -->
+
+<div>
+
+<label>Programming Mark</label>
+
+<input
+type="number"
+id="programming"
+min="0"
+max="100"
+value="0">
+
+</div>
+
+
+<div>
+
+<label>Mathematics Mark</label>
+
+<input
+type="number"
+id="mathematics"
+min="0"
+max="100"
+value="0">
+
+</div>
+
+
+<div>
+
+<label>Database Mark</label>
+
+<input
+type="number"
+id="database"
+min="0"
+max="100"
+value="0">
+
+</div>
+
+
+<div>
+
+<label>Computer Networks Mark</label>
+
+<input
+type="number"
+id="networks"
+min="0"
+max="100"
+value="0">
+
+</div>
+
+
+<div>
+
+<label>Attendance Percentage</label>
+
+<input
+type="number"
+id="attendance"
+min="0"
+max="100"
+value="0">
+
+</div>
+
+
+</div>
+
+
+<button
+type="submit"
+class="generate">
+
+Generate Student Report
+
+</button>
+
+
+<button
+type="button"
+class="clear"
+onclick="clearForm()">
+
+Clear
+
+</button>
+
+
+</form>
+
+
+<div
+id="success"
+class="success">
+
+✅ Student information processed successfully!
+
+</div>
+
+</div>
+
+
+<!-- Report -->
+
+<div class="card" id="report">
+
+<h2>📋 Student Information Report</h2>
+
+
+<div class="student-info">
+
+
+<div class="info-box">
+
+<strong>Student Name:</strong>
+<span id="rName"></span>
+
+</div>
+
+
+<div class="info-box">
+
+<strong>Register Number:</strong>
+<span id="rReg"></span>
+
+</div>
+
+
+<div class="info-box">
+
+<strong>Age:</strong>
+<span id="rAge"></span>
+
+</div>
+
+
+<div class="info-box">
+
+<strong>Course:</strong>
+<span id="rCourse"></span>
+
+</div>
+
+
+<div class="info-box">
+
+<strong>Semester:</strong>
+<span id="rSemester"></span>
+
+</div>
+
+
+<div class="info-box">
+
+<strong>Phone:</strong>
+<span id="rPhone"></span>
+
+</div>
+
+
+<div class="info-box full">
+
+<strong>Address:</strong>
+<span id="rAddress"></span>
+
+</div>
+
+
+</div>
+
+
+<!-- Grades -->
+
+<h2>📊 Grades</h2>
+
+<table>
+
+<tr>
+
+<th>Subject</th>
+<th>Mark</th>
+<th>Grade</th>
+
+</tr>
+
+
+<tr>
+
+<td>Programming</td>
+<td id="rProgramming"></td>
+<td id="gProgramming"></td>
+
+</tr>
+
+
+<tr>
+
+<td>Mathematics</td>
+<td id="rMathematics"></td>
+<td id="gMathematics"></td>
+
+</tr>
+
+
+<tr>
+
+<td>Database</td>
+<td id="rDatabase"></td>
+<td id="gDatabase"></td>
+
+</tr>
+
+
+<tr>
+
+<td>Computer Networks</td>
+<td id="rNetworks"></td>
+<td id="gNetworks"></td>
+
+</tr>
+
+
+<tr>
+
+<th>Total</th>
+<th id="total"></th>
+<th id="overallGrade"></th>
+
+</tr>
+
+</table>
+
+
+<!-- Attendance -->
+
+<h2>📅 Attendance Report</h2>
+
+<p>
+
+<strong>Attendance Percentage:</strong>
+
+<span id="attendanceValue"></span>%
+
+</p>
+
+
+<div class="progress-container">
+
+<div
+class="progress-bar"
+id="attendanceBar">
+
+0%
+
+</div>
+
+</div>
+
+
+<p id="attendanceStatus"></p>
+
+
+<!-- Progress -->
+
+<h2>📈 Progress Report</h2>
+
+<table>
+
+<tr>
+
+<th>Total Marks</th>
+<th>Average</th>
+<th>Performance</th>
+
+</tr>
+
+
+<tr>
+
+<td id="progressTotal"></td>
+
+<td id="average"></td>
+
+<td id="performance"></td>
+
+</tr>
+
+</table>
+
+
+<!-- Semester Mark Sheet -->
+
+<h2>📜 Semester Mark Sheet</h2>
+
+<table>
+
+<tr>
+
+<th>Semester</th>
+<th>Total Marks</th>
+<th>Average</th>
+<th>Result</th>
+
+</tr>
+
+
+<tr>
+
+<td id="semesterResult"></td>
+
+<td id="semesterTotal"></td>
+
+<td id="semesterAverage"></td>
+
+<td id="semesterStatus"></td>
+
+</tr>
+
+</table>
+
+
+<button
+class="print"
+onclick="window.print()">
+
+🖨️ Print Student Report
+
+</button>
+
+</div>
+
+
+<!-- C Program -->
+
+<div class="card c-card">
+
+<h2>💻 C Program Used for Student Information</h2>
+
+<pre>
+#include &lt;stdio.h&gt;
+
+struct Student
+{
+    char name[50];
+    char regNo[20];
+    char address[100];
+    char phone[20];
+    int age;
+    char course[50];
+    float programming;
+    float mathematics;
+    float database;
+    float networks;
+    float attendance;
+};
+
+int main()
+{
+    struct Student s;
+
+    printf("Enter Student Name: ");
+    scanf(" %[^\n]", s.name);
+
+    printf("Enter Register Number: ");
+    scanf("%s", s.regNo);
+
+    printf("Enter Address: ");
+    scanf(" %[^\n]", s.address);
+
+    printf("Enter Phone Number: ");
+    scanf("%s", s.phone);
+
+    printf("Enter Age: ");
+    scanf("%d", &s.age);
+
+    printf("Enter Course: ");
+    scanf(" %[^\n]", s.course);
+
+    printf("Enter Programming Mark: ");
+    scanf("%f", &s.programming);
+
+    printf("Enter Mathematics Mark: ");
+    scanf("%f", &s.mathematics);
+
+    printf("Enter Database Mark: ");
+    scanf("%f", &s.database);
+
+    printf("Enter Computer Networks Mark: ");
+    scanf("%f", &s.networks);
+
+    printf("Enter Attendance: ");
+    scanf("%f", &s.attendance);
+
+    printf("\n----- STUDENT INFORMATION -----\n");
+
+    printf("Name: %s\n", s.name);
+    printf("Register No: %s\n", s.regNo);
+    printf("Address: %s\n", s.address);
+    printf("Phone: %s\n", s.phone);
+    printf("Age: %d\n", s.age);
+    printf("Course: %s\n", s.course);
+
+    printf("\n----- MARKS -----\n");
+
+    printf("Programming: %.2f\n", s.programming);
+    printf("Mathematics: %.2f\n", s.mathematics);
+    printf("Database: %.2f\n", s.database);
+    printf("Networks: %.2f\n", s.networks);
+
+    printf("\nAttendance: %.2f%%\n", s.attendance);
+
+    return 0;
+}
+</pre>
+
+</div>
+
+</div>
+
+
+<footer>
+
+<p>
+☁️ Cloud SaaS Demonstration |
+Student Information Management System
+</p>
+
+</footer>
+
+
+<script>
+
+
+function getGrade(mark)
+{
+
+    if(mark >= 90)
+        return "A+";
+
+    else if(mark >= 80)
+        return "A";
+
+    else if(mark >= 70)
+        return "B";
+
+    else if(mark >= 60)
+        return "C";
+
+    else if(mark >= 50)
+        return "D";
+
+    else
+        return "F";
+
+}
+
+
+document
+.getElementById("studentForm")
+.addEventListener("submit", function(e)
+{
+
+    e.preventDefault();
+
+
+    let name =
+        document.getElementById("studentName").value;
+
+    let reg =
+        document.getElementById("regNo").value;
+
+    let address =
+        document.getElementById("address").value;
+
+    let phone =
+        document.getElementById("phone").value;
+
+    let age =
+        document.getElementById("age").value;
+
+    let course =
+        document.getElementById("course").value;
+
+    let semester =
+        document.getElementById("semester").value;
+
+
+    let programming =
+        Number(document.getElementById("programming").value);
+
+    let mathematics =
+        Number(document.getElementById("mathematics").value);
+
+    let database =
+        Number(document.getElementById("database").value);
+
+    let networks =
+        Number(document.getElementById("networks").value);
+
+    let attendance =
+        Number(document.getElementById("attendance").value);
+
+
+    let total =
+        programming +
+        mathematics +
+        database +
+        networks;
+
+
+    let avg = total / 4;
+
+
+    /* Student Details */
+
+    document.getElementById("rName").textContent = name;
+
+    document.getElementById("rReg").textContent = reg;
+
+    document.getElementById("rAge").textContent = age;
+
+    document.getElementById("rCourse").textContent = course;
+
+    document.getElementById("rSemester").textContent = semester;
+
+    document.getElementById("rPhone").textContent = phone;
+
+    document.getElementById("rAddress").textContent = address;
+
+
+    /* Marks */
+
+    document.getElementById("rProgramming").textContent =
+        programming;
+
+    document.getElementById("rMathematics").textContent =
+        mathematics;
+
+    document.getElementById("rDatabase").textContent =
+        database;
+
+    document.getElementById("rNetworks").textContent =
+        networks;
+
+
+    /* Grades */
+
+    document.getElementById("gProgramming").textContent =
+        getGrade(programming);
+
+    document.getElementById("gMathematics").textContent =
+        getGrade(mathematics);
+
+    document.getElementById("gDatabase").textContent =
+        getGrade(database);
+
+    document.getElementById("gNetworks").textContent =
+        getGrade(networks);
+
+
+    document.getElementById("total").textContent =
+        total + " / 400";
+
+
+    document.getElementById("overallGrade").textContent =
+        getGrade(avg);
+
+
+    /* Attendance */
+
+    document.getElementById("attendanceValue").textContent =
+        attendance;
+
+
+    document.getElementById("attendanceBar").style.width =
+        attendance + "%";
+
+    document.getElementById("attendanceBar").textContent =
+        attendance + "%";
+
+
+    if(attendance >= 75)
+    {
+
+        document.getElementById("attendanceStatus")
+        .textContent =
+        "✅ Eligible for Examination";
+
+    }
+    else
+    {
+
+        document.getElementById("attendanceStatus")
+        .textContent =
+        "⚠️ Attendance Shortage";
+
+    }
+
+
+    /* Progress */
+
+    document.getElementById("progressTotal")
+    .textContent =
+        total + " / 400";
+
+
+    document.getElementById("average")
+    .textContent =
+        avg.toFixed(2) + "%";
+
+
+    let performance;
+
+
+    if(avg >= 90)
+        performance = "Excellent";
+
+    else if(avg >= 75)
+        performance = "Very Good";
+
+    else if(avg >= 60)
+        performance = "Good";
+
+    else if(avg >= 50)
+        performance = "Average";
+
+    else
+        performance = "Needs Improvement";
+
+
+    document.getElementById("performance")
+    .textContent =
+        performance;
+
+
+    /* Semester Mark Sheet */
+
+    document.getElementById("semesterResult")
+    .textContent =
+        semester;
+
+
+    document.getElementById("semesterTotal")
+    .textContent =
+        total + " / 400";
+
+
+    document.getElementById("semesterAverage")
+    .textContent =
+        avg.toFixed(2) + "%";
+
+
+    if(avg >= 50)
+    {
+
+        document.getElementById("semesterStatus")
+        .textContent =
+        "PASS";
+
+    }
+    else
+    {
+
+        document.getElementById("semesterStatus")
+        .textContent =
+        "FAIL";
+
+    }
+
+
+    /* Display Report */
+
+    document.getElementById("report")
+    .style.display = "block";
+
+
+    document.getElementById("success")
+    .style.display = "block";
+
+
+    /* Save information */
+
+    localStorage.setItem(
+        "studentInformation",
+        JSON.stringify({
+            name,
+            reg,
+            address,
+            phone,
+            age,
+            course,
+            semester,
+            programming,
+            mathematics,
+            database,
+            networks,
+            attendance
+        })
+    );
+
+
+    window.scrollTo({
+        top: document.getElementById("report").offsetTop,
+        behavior: "smooth"
+    });
+
+});
+
+
+function clearForm()
+{
+
+    document
+    .getElementById("studentForm")
+    .reset();
+
+    document
+    .getElementById("report")
+    .style.display = "none";
+
+    document
+    .getElementById("success")
+    .style.display = "none";
+
+}
+
+</script>
+
+</body>
+</html>
